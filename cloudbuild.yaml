@@ -2,17 +2,28 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
+  # Build
   - name: "gcr.io/cloud-builders/docker"
     args:
       ["build", "-t", "gcr.io/premium-hybrid-443311-u4/fast-api:latest", "."]
+
+  # Push
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/premium-hybrid-443311-u4/fast-api:latest"]
 
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  # Deploy
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
-    args: ['run', 'deploy', 'SERVICE_NAME', '--image', 'gcr.io/PROJECT_ID/IMAGE', '--region', 'SERVICE_REGION']
-images:
-- gcr.io/PROJECT_ID/IMAGE
+    args:
+      [
+        "run",
+        "deploy",
+        "fast-api-test",
+        "--image",
+        "gcr.io/premium-hybrid-443311-u4/fast-api:latest",
+        "--region",
+        "us-central1",
+      ]
 
 images:
   - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
