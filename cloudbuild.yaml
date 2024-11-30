@@ -43,7 +43,7 @@ steps:
     args:
       - '-c'
       kubectl apply -f kubernetes/deployment.yaml
-      service apply -f kubernetes/deployment.yaml
+      kubectl apply -f kubernetes/service.yaml
 
 images:
   - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
