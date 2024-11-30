@@ -8,5 +8,11 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/premium-hybrid-443311-u4/fast-api:latest"]
 
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'SERVICE_NAME', '--image', 'gcr.io/PROJECT_ID/IMAGE', '--region', 'SERVICE_REGION']
+images:
+- gcr.io/PROJECT_ID/IMAGE
+
 images:
   - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
