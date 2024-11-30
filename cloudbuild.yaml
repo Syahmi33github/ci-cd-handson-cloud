@@ -23,6 +23,9 @@ steps:
         "gcr.io/premium-hybrid-443311-u4/fast-api:latest",
         "--region",
         "us-central1",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
       ]
 
 images:
