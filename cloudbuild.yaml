@@ -11,22 +11,39 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/premium-hybrid-443311-u4/fast-api:latest"]
 
-  # Deploy
+  # authenticated to GKE
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: gcloud
+    entrypoint: bash
     args:
-      [
-        "run",
-        "deploy",
-        "fast-api-test",
-        "--image",
-        "gcr.io/premium-hybrid-443311-u4/fast-api:latest",
-        "--region",
-        "us-central1",
-        "--platform",
-        "managed",
-        "--allow-unauthenticated",
-      ]
+      - 'c'
+      - |
+        gcloud container clusters get-credentials ci-cd-cluster --zone=us central1-a --project=premium-hybrid-443311-u4
+
+
+  # Deploy to cloud run
+  # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  #   entrypoint: gcloud
+  #   args:
+  #     [
+  #       "run",
+  #       "deploy",
+  #       "fast-api-test",
+  #       "--image",
+  #       "gcr.io/premium-hybrid-443311-u4/fast-api:latest",
+  #       "--region",
+  #       "us-central1",
+  #       "--platform",
+  #       "managed",
+  #       "--allow-unauthenticated",
+  #     ]
+
+  # Deploy to GKE
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      kubectl apply -f kubernetes/deployment.yaml
+      service apply -f kubernetes/deployment.yaml
 
 images:
   - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
