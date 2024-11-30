@@ -15,10 +15,9 @@ steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: bash
     args:
-      - 'c'
+      - "c"
       - |
         gcloud container clusters get-credentials ci-cd-cluster --zone=us central1-a --project=premium-hybrid-443311-u4
-
 
   # Deploy to cloud run
   # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
@@ -39,12 +38,12 @@ steps:
 
   # Deploy to GKE
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: 'bash'
+    entrypoint: "bash"
     args:
-      - '-c'
-      |
-      kubectl apply -f kubernetes/deployment.yaml
-      kubectl apply -f kubernetes/service.yaml
+      - "-c"
+      - |
+        kubectl apply -f kubernetes/deployment.yaml
+        kubectl apply -f kubernetes/service.yaml
 
 images:
   - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
