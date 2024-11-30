@@ -13,11 +13,11 @@ steps:
 
   # authenticated to GKE
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: bash
+    entrypoint: "bash"
     args:
-      - "c"
+      - "-c"
       - |
-        gcloud container clusters get-credentials ci-cd-cluster --zone=us central1-a --project=premium-hybrid-443311-u4
+        gcloud container clusters get-credentials ci-cd-cluster --zone=us-central1-a --project=premium-hybrid-443311-u4
 
   # Deploy to cloud run
   # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
