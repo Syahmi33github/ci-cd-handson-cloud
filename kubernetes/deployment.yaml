@@ -18,7 +18,7 @@ spec:
         - name: fast-api
           image: gcr.io/premium-hybrid-443311-u4/fast-api:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           resources:
             requests:
               cpu: 200m
