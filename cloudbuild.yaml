@@ -1,0 +1,9 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      ["build", "-t", "gcr.io/premium-hybrid-443311-u4/fast-api:latest", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/premium-hybrid-443311-u4/fast-api:latest"]
+
+images:
+  - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
