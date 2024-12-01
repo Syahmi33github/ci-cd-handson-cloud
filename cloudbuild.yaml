@@ -11,39 +11,39 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/premium-hybrid-443311-u4/fast-api:latest"]
 
-  # # authenticated to GKE
-  # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-  #   entrypoint: "bash"
-  #   args:
-  #     - "-c"
-  #     - |
-  #       gcloud container clusters get-credentials ci-cd-cluster --zone=us-central1-a --project=premium-hybrid-443311-u4
-
-  # # Deploy to GKE
-  # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-  #   entrypoint: "bash"
-  #   args:
-  #     - "-c"
-  #     - |
-  #       kubectl apply -f kubernetes/deployment.yaml
-  #       kubectl apply -f kubernetes/service.yaml
+  # authenticated to GKE
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud container clusters get-credentials ci-cd-cluster --zone=us-central1-a --project=premium-hybrid-443311-u4
 
   # Deploy to cloud run
+  # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  #   entrypoint: gcloud
+  #   args:
+  #     [
+  #       "run",
+  #       "deploy",
+  #       "fast-api-test",
+  #       "--image",
+  #       "gcr.io/premium-hybrid-443311-u4/fast-api:latest",
+  #       "--region",
+  #       "us-central1",
+  #       "--platform",
+  #       "managed",
+  #       "--allow-unauthenticated",
+  #     ]
+
+  # Deploy to GKE
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: gcloud
+    entrypoint: "bash"
     args:
-      [
-        "run",
-        "deploy",
-        "fast-api-test",
-        "--image",
-        "gcr.io/premium-hybrid-443311-u4/fast-api:latest",
-        "--region",
-        "us-central1",
-        "--platform",
-        "managed",
-        "--allow-unauthenticated",
-      ]
+      - "-c"
+      - |
+        kubectl apply -f kubernetes/deployment.yaml
+        kubectl apply -f kubernetes/service.yaml
 
 images:
   - "gcr.io/premium-hybrid-443311-u4/fast-api:latest"
