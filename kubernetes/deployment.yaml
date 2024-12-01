@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: fast-api
-          image: syahmisajid/k8s-fast-api:0.0.1
+          image: gcr.io/premium-hybrid-443311-u4/fast-api:latest
           ports:
             - containerPort: 80
           resources:
