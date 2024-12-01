@@ -8,6 +8,8 @@ import os
 # Memuat file .env
 load_dotenv()
 
+print('test')
+
 # Mengambil API key dari .env
 api_key = os.getenv("OPENAI_API_KEY")
 
