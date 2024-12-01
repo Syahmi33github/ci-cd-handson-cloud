@@ -1,0 +1,8 @@
+# Mengabaikan file .env yang berisi API key
+.env
+
+# Mengabaikan file cache Python
+__pycache__/
+
+# Mengabaikan file konfigurasi lainnya
+*.pyc
